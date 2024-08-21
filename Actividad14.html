@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Dibujar Figuras</title>
+</head>
+<body>
+    <h1>Actividad 14: Robeto Lopez</h1>
+
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    let lastX, lastY;
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function dibujarCirculo(x, y) {
+        const radio = 50;
+        const color = getRandomColor();
+
+        ctx.beginPath();
+        ctx.arc(x, y, radio, 0, Math.PI * 2);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    function dibujarCuadrado(x, y) {
+        const lado = 100;
+        const color = getRandomColor();
+        const offset = lado / 2;
+
+        ctx.beginPath();
+        ctx.rect(x - offset, y - offset, lado, lado);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    canvas.addEventListener("mousedown", (event) => {
+        const rect = canvas.getBoundingClientRect();
+        lastX = event.clientX - rect.left;
+        lastY = event.clientY - rect.top;
+
+        dibujarCirculo(lastX, lastY);
+    });
+
+    canvas.addEventListener("mouseout", () => {
+        if (lastX !== undefined && lastY !== undefined) {
+            dibujarCuadrado(lastX, lastY);
+        }
+    });
+    </script>
+
+</body>
+</html>
