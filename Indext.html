@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Dibujar Círculos</title>
+</head>
+<body>
+
+    <h1>Practica 12: Roberto Lopez</h1>
+
+
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.addEventListener("mousedown", (event) => {
+
+        function dibujarCirculo(event) {
+
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const radio = 50;
+            ctx.beginPath();
+            ctx.arc(x, y, radio, 0, Math.PI * 2);
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(192, 50, 50, 0.7)"; 
+            ctx.fill();
+        }
+
+        dibujarCirculo(event);
+    });
+    </script>
+
+</body>
+</html>
